@@ -1,0 +1,20 @@
+KAFKA Console Scripts
+
+https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/kafka_admin_cli.html#concept_ayw_3tx_yfb
+
+
+kafka-topics --zookeeper c1255-node2.coelab.cloudera.com:2181 --list
+
+kafka-topics --zookeeper c1255-node2.coelab.cloudera.com:2181 --describe --topic reassignment-test
+
+/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper c2255-node2.coelab.cloudera.com:2181 --create --topic kafka-hive --partitions 2 --replication-factor 2
+
+
+./data-generator.sh | kafka-console-producer --broker-list c1255-node2.coelab.cloudera.com:9092 --topic jupyter
+
+Topic:reassignment-test PartitionCount:1        ReplicationFactor:1     Configs:cleanup.policy=delete,min.insync.replicas=1
+        Topic: reassignment-test        Partition: 0    Leader: 42      Replicas: 42    Isr: 42
+
+
+kafka-reassign-partitions --zookeeper hostname:port --topics-to-move-json-file topics to move.json --broker-list broker 1, broker 2 --generate
+
